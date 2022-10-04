@@ -1,0 +1,12 @@
+.logo img {
+    height: inherit;
+    width: auto;
+}
+
+.logo {
+    padding-top: 5px;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    height: inherit;
+    /* max-height: 80px; */
+}
