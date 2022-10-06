@@ -37,8 +37,8 @@ export default function GalleryItem(props) {
                 <Box
                     component="img"
                     sx={{
-                        height: '100%',
-                        width: '100%'
+                        maxHeight: '90vh',
+                        overflow: 'auto'
                     }}
                     alt={selectedPhoto?.title}
                     src={selectedPhoto?.img}

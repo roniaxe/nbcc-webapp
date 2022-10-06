@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,20 +8,26 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-import { Outlet } from 'react-router-dom';
+import {
+    Link as RouterLink, Outlet, useLocation, useNavigate
+} from 'react-router-dom';
+import {
+    Card, CardActionArea, CardMedia
+} from '@mui/material';
 import Logo from '../../assets/NBCC_logo.jpg';
-import styles from './Menu.module.css';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Home', 'Galleries', 'Tournaments', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NbccAppBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -30,13 +36,21 @@ function NbccAppBar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (event, index, pageName) => {
+        setSelectedIndex(index);
         setAnchorElNav(null);
+        navigate(`/${pageName.toLocaleLowerCase()}`);
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const { pathname } = location;
+
+    useEffect(() => {
+        const idxx = pages.findIndex((page) => pathname.includes(page.toLocaleLowerCase()));
+        setSelectedIndex(idxx);
+    }, [pathname]);
 
     return (
         <>
@@ -48,17 +62,16 @@ function NbccAppBar() {
                             height: 100,
                         }}
                     >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            sx={{
-                                mr: 5,
-                                display: { xs: 'none', md: 'flex' },
-                                height: 0.95,
-                            }}
-                        >
-                            <img src={Logo} alt="logo" className={styles.logo} />
-                        </Typography>
+                        <Card sx={{ maxWidth: 180, mr: 10, display: { xs: 'none', md: 'flex' } }} onClick={() => setSelectedIndex(0)}>
+                            <CardActionArea component={RouterLink} to="/">
+                                <CardMedia
+                                    component="img"
+                                    height="80"
+                                    image={Logo}
+                                    alt="NBCC logo"
+                                />
+                            </CardActionArea>
+                        </Card>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
@@ -89,19 +102,53 @@ function NbccAppBar() {
                                     display: { xs: 'block', md: 'none' },
                                 }}
                             >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                {pages.map((page, idx) => (
+                                    <MenuItem
+                                        key={page}
+                                        onClick={(e) => handleCloseNavMenu(e, idx)}
+                                        selected={selectedIndex === idx}
+                                    >
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
                         </Box>
 
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {pages.map((page) => (
-                                <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                        <Box sx={{
+                            flexGrow: 1,
+                            display: {
+                                xs: 'none',
+                                md: 'flex',
+                                '& .Mui-selected': {
+                                    textDecoration: 'underline',
+                                    textUnderlineOffset: '5px'
+                                },
+                                '& .Mui-selected:hover': {
+                                    color: 'white',
+                                    textDecoration: 'underline',
+                                    textUnderlineOffset: '5px'
+                                },
+                            }
+                        }}
+                        >
+                            {pages.map((page, idx) => (
+                                <MenuItem
+                                    key={page}
+                                    onClick={(e) => handleCloseNavMenu(e, idx, page)}
+                                    selected={selectedIndex === idx}
+                                    sx={{
+                                        my: 2,
+                                        color: 'white',
+                                        display: 'block',
+                                        '&:hover': {
+                                            backgroundColor: 'white',
+                                            color: 'black',
+                                            borderRadius: '10px'
+                                        }
+                                    }}
+                                >
                                     {page}
-                                </Button>
+                                </MenuItem>
                             ))}
                         </Box>
 
@@ -137,7 +184,8 @@ function NbccAppBar() {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Outlet />
+            <Container maxWidth="xl" sx={{ pt: 5 }}><Outlet /></Container>
+
         </>
     );
 }
