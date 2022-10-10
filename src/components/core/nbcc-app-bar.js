@@ -17,12 +17,17 @@ import {
 import {
     Card, CardActionArea, CardMedia
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
 import Logo from '../../assets/NBCC_logo.jpg';
+import { actions as generalActions } from '../../redux/general/slice';
 
-const pages = ['Home', 'Galleries', 'Tournaments', 'About'];
+const pages = ['Home', 'Galleries', 'Tournaments', 'Membership', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NbccAppBar() {
+    const themeMode = useSelector((state) => state.general.mode);
+    const dispatch = useDispatch();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -46,6 +51,8 @@ function NbccAppBar() {
         setAnchorElUser(null);
     };
     const { pathname } = location;
+
+    const toggleThemeMode = () => dispatch(generalActions.toggleMode(themeMode === 'light' ? 'dark' : 'light'));
 
     useEffect(() => {
         const idxx = pages.findIndex((page) => pathname.includes(page.toLocaleLowerCase()));
@@ -180,6 +187,11 @@ function NbccAppBar() {
                                     </MenuItem>
                                 ))}
                             </Menu>
+                            <Tooltip title={`Switch to ${themeMode === 'dark' ? 'Light Mode' : 'Dark Mode'}`}>
+                                <IconButton sx={{ ml: 1 }} onClick={toggleThemeMode} color="inherit">
+                                    {themeMode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+                                </IconButton>
+                            </Tooltip>
                         </Box>
                     </Toolbar>
                 </Container>

@@ -4,18 +4,15 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Unstable_Grid2';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useGetCollectionsByUserNameQuery } from '../../services/unsplash-api-slice';
 import Loader from '../../components/common/loader';
 
-const theme = createTheme();
 export default function Galleries() {
     const navigate = useNavigate();
 
@@ -45,8 +42,7 @@ export default function Galleries() {
 
     if (isSuccess) {
         return (
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
+            <>
                 <main>
                     {/* Hero unit */}
                     <Box
@@ -134,7 +130,7 @@ export default function Galleries() {
                     </Typography>
                 </Box>
                 {/* End footer */}
-            </ThemeProvider>
+            </>
         );
     }
 }

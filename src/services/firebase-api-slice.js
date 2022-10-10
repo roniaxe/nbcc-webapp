@@ -15,10 +15,14 @@ export const firebaseApiSlice = createApi({
     endpoints: (build) => ({
         getAboutData: build.query({
             query: () => 'about.json'
+        }),
+        getMembershipData: build.query({
+            query: () => 'membership.json'
         })
     })
 });
 
 export const {
-    useGetAboutDataQuery
+    useGetAboutDataQuery,
+    useGetMembershipDataQuery
 } = firebaseApiSlice;
