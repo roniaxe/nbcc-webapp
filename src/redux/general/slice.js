@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const mode = localStorage.getItem('mode');
+
 const initialState = {
-    mode: 'light',
+    mode: mode || 'light',
 };
 
 const slice = createSlice({
