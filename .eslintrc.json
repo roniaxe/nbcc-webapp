@@ -51,6 +51,7 @@
         ]
       }
     ],
-    "no-return-await": 0
+    "no-return-await": 0,
+    "linebreak-style": 0
   }
 }
