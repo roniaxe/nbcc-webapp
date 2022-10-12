@@ -3,6 +3,7 @@ import {
     BrowserRouter, Navigate, Route, Routes
 } from 'react-router-dom';
 import NbccAppBar from './components/core/nbcc-app-bar';
+import LoadingPage from './pages/loading';
 
 const HomePage = lazy(() => import('./pages/home'));
 const GalleriesPage = lazy(() => import('./pages/galleries'));
@@ -11,7 +12,7 @@ const AboutPage = lazy(() => import('./pages/about'));
 const TournamentsPage = lazy(() => import('./pages/tournaments'));
 const MembershipPage = lazy(() => import('./pages/membership'));
 
-const page = (elem) => <Suspense fallback="Loading...">{elem}</Suspense>;
+const page = (elem) => <Suspense fallback={<LoadingPage />}>{elem}</Suspense>;
 
 function PageRouter() {
     return (
