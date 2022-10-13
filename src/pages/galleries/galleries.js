@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from '@mui/material';
 import { useGetCollectionsByUserNameQuery } from '../../services/unsplash-api-slice';
 import Loader from '../../components/common/loader';
 
@@ -31,13 +32,8 @@ export default function Galleries() {
     if (isLoading) return <Loader />;
 
     if (isError) {
-        return (
-            <div>
-                Oops, there was an error loading the galleries:
-                {' '}
-                {error.toString()}
-            </div>
-        );
+        return <Alert severity="error">{error}</Alert>;
+
     }
 
     if (isSuccess) {
