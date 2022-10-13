@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import {
     BrowserRouter, Navigate, Route, Routes
 } from 'react-router-dom';
-import NbccAppBar from './components/core/nbcc-app-bar';
+import AppLayout from './layout/app-layout';
 import LoadingPage from './pages/loading';
 
 const HomePage = lazy(() => import('./pages/home'));
@@ -18,7 +18,7 @@ function PageRouter() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<NbccAppBar />}>
+                <Route element={<AppLayout />}>
                     <Route index element={<Navigate to="/home" replace />} />
                     <Route path="/home" element={page(<HomePage />)} />
                     <Route path="/tournaments" element={page(<TournamentsPage />)} />

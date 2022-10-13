@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
+import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
 import {
-    Link as RouterLink, Outlet, useLocation, useNavigate
+    Link as RouterLink, useLocation, useNavigate
 } from 'react-router-dom';
 import {
     Card, CardActionArea, CardMedia
@@ -25,7 +25,7 @@ import { actions as generalActions } from '../../redux/general/slice';
 const pages = ['Home', 'Galleries', 'Tournaments', 'Membership', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function NbccAppBar() {
+function AppBar({ sx }) {
     const themeMode = useSelector((state) => state.general.mode);
     const dispatch = useDispatch();
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -61,7 +61,7 @@ function NbccAppBar() {
 
     return (
         <>
-            <AppBar position="static">
+            <MuiAppBar sx={{ ...sx, mb: 2 }} position="static">
                 <Container maxWidth="xl">
                     <Toolbar
                         disableGutters
@@ -195,10 +195,10 @@ function NbccAppBar() {
                         </Box>
                     </Toolbar>
                 </Container>
-            </AppBar>
-            <Container maxWidth="xl" sx={{ pt: 5 }}><Outlet /></Container>
+            </MuiAppBar>
+            {/* <Container maxWidth="xl" sx={{ pt: 5 }}><Outlet /></Container> */}
 
         </>
     );
 }
-export default NbccAppBar;
+export default AppBar;

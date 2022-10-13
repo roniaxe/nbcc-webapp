@@ -1,4 +1,5 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { HelmetProvider } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import './App.css';
 import PageRouter from './page-router';
@@ -16,8 +17,9 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <PageRouter />
+            <HelmetProvider>
+                <PageRouter />
+            </HelmetProvider>
         </ThemeProvider>
     );
 }
