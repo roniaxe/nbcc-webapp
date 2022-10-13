@@ -43,7 +43,10 @@ export default function AboutPage() {
         return (
             <Box
                 sx={{
-                    flexGrow: 1, bgcolor: 'background.paper', display: 'flex'
+                    flexGrow: 1,
+                    backgroundColor: 'background.paper',
+                    display: 'flex',
+                    ml: 4
                 }}
             >
                 <Tabs

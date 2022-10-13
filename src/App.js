@@ -1,8 +1,9 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import { HelmetProvider } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import PageRouter from './page-router';
+import { browserRouter } from './page-router';
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <HelmetProvider>
-                <PageRouter />
+                <RouterProvider router={browserRouter} />
             </HelmetProvider>
         </ThemeProvider>
     );

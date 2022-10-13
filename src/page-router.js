@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import {
-    BrowserRouter, Navigate, Route, Routes
+    createBrowserRouter, Navigate
 } from 'react-router-dom';
 import AppLayout from './layout/app-layout';
 import LoadingPage from './pages/loading';
@@ -11,25 +11,44 @@ const GalleryPhotos = lazy(() => import('./pages/galleries/gallery-photos'));
 const AboutPage = lazy(() => import('./pages/about'));
 const TournamentsPage = lazy(() => import('./pages/tournaments'));
 const MembershipPage = lazy(() => import('./pages/membership'));
+const ErrorPage = lazy(() => import('./pages/error'));
 
 const page = (elem) => <Suspense fallback={<LoadingPage />}>{elem}</Suspense>;
 
-function PageRouter() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route element={<AppLayout />}>
-                    <Route index element={<Navigate to="/home" replace />} />
-                    <Route path="/home" element={page(<HomePage />)} />
-                    <Route path="/tournaments" element={page(<TournamentsPage />)} />
-                    <Route path="/membership" element={page(<MembershipPage />)} />
-                    <Route path="/about" element={page(<AboutPage />)} />
-                    <Route path="/galleries" element={page(<GalleriesPage />)} />
-                    <Route path="/galleries/:galleryId/photos" element={page(<GalleryPhotos />)} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
-}
-
-export default PageRouter;
+export const browserRouter = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                index: true,
+                element: <Navigate to="/home" replace />
+            },
+            {
+                path: '/home',
+                element: page(<HomePage />)
+            },
+            {
+                path: '/tournaments',
+                element: page(<TournamentsPage />)
+            },
+            {
+                path: '/membership',
+                element: page(<MembershipPage />)
+            },
+            {
+                path: '/about',
+                element: page(<AboutPage />)
+            },
+            {
+                path: '/galleries',
+                element: page(<GalleriesPage />)
+            },
+            {
+                path: '/galleries/:galleryId/photos',
+                element: page(<GalleryPhotos />)
+            }
+        ]
+    }
+]);
