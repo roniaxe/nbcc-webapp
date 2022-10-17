@@ -51,11 +51,15 @@ export default function AboutPage() {
             >
                 <Tabs
                     orientation="vertical"
-                    variant="scrollable"
                     value={tabValue}
                     onChange={handleTabChange}
-                    aria-label="Vertical tabs example"
-                    sx={{ borderRight: 1, borderColor: 'divider' }}
+                    aria-label="Vertical about tabs"
+                    sx={{
+                        borderRight: 1,
+                        borderColor: 'divider',
+                        minWidth: 150,
+                        mr: { xs: 0, sm: 2, md: 4 }
+                    }}
                 >
                     <Tab label="General" {...a11yProps(0)} />
                     <Tab label="Item Two" {...a11yProps(1)} />
@@ -69,7 +73,11 @@ export default function AboutPage() {
                     <Container maxWidth="md">
                         {about.general && about.general.map((paragraph, index) => (
                             <React.Fragment key={paragraph.title}>
-                                <Paragraph title={paragraph.title} text={paragraph.text} />
+                                <Paragraph
+                                    title={paragraph.title}
+                                    text={paragraph.text}
+                                    styles={{ wordBreak: 'break-word' }}
+                                />
                                 {index !== about.general.length - 1 && <Divider sx={{ my: 3 }} />}
                             </React.Fragment>
                         ))}

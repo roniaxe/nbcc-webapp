@@ -78,7 +78,7 @@ export default function Galleries() {
                         {/* End hero unit */}
                         <Grid container spacing={4}>
                             {galleries.map((gallery) => (
-                                <Grid item key={gallery.id} xs={12} sm={6} md={4}>
+                                <Grid key={gallery.id} xs={12} sm={6} md={4}>
                                     <Card
                                         sx={{
                                             height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer'

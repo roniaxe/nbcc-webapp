@@ -44,7 +44,9 @@ function AppBar({ sx }) {
     const handleCloseNavMenu = (event, index, pageName) => {
         setSelectedIndex(index);
         setAnchorElNav(null);
-        navigate(`/${pageName.toLocaleLowerCase()}`);
+        if (pageName) {
+            navigate(`/${pageName.toLocaleLowerCase()}`);
+        }
     };
 
     const handleCloseUserMenu = () => {
@@ -69,11 +71,18 @@ function AppBar({ sx }) {
                             height: 100,
                         }}
                     >
-                        <Card sx={{ maxWidth: 180, mr: 10, display: { xs: 'none', md: 'flex' } }} onClick={() => setSelectedIndex(0)}>
+                        <Card
+                            sx={{
+                                maxWidth: 80,
+                                mr: 10,
+                                display: { xs: 'none', md: 'flex' },
+                                boxShadow: '3px 3px 9px cyan'
+                            }}
+                            onClick={() => setSelectedIndex(0)}
+                        >
                             <CardActionArea component={RouterLink} to="/">
                                 <CardMedia
                                     component="img"
-                                    height="80"
                                     image={Logo}
                                     alt="NBCC logo"
                                 />
@@ -112,7 +121,7 @@ function AppBar({ sx }) {
                                 {pages.map((page, idx) => (
                                     <MenuItem
                                         key={page}
-                                        onClick={(e) => handleCloseNavMenu(e, idx)}
+                                        onClick={(e) => handleCloseNavMenu(e, idx, page)}
                                         selected={selectedIndex === idx}
                                     >
                                         <Typography textAlign="center">{page}</Typography>
@@ -128,14 +137,12 @@ function AppBar({ sx }) {
                                 md: 'flex',
                                 '& .Mui-selected': {
                                     textDecoration: 'underline',
-                                    textUnderlineOffset: '5px'
-                                },
-                                '& .Mui-selected:hover': {
-                                    color: 'white',
-                                    textDecoration: 'underline',
-                                    textUnderlineOffset: '5px'
-                                },
-                            }
+                                    textUnderlineOffset: '5px',
+                                    borderRadius: '10px',
+                                    '&:hover': { color: 'white' }
+                                }
+                            },
+                            justifyContent: 'space-evenly'
                         }}
                         >
                             {pages.map((page, idx) => (
