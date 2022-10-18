@@ -11,6 +11,7 @@ const GalleryPhotos = lazy(() => import('./pages/galleries/gallery-photos'));
 const AboutPage = lazy(() => import('./pages/about'));
 const TournamentsPage = lazy(() => import('./pages/tournaments'));
 const MembershipPage = lazy(() => import('./pages/membership'));
+const HistoryPage = lazy(() => import('./pages/history'));
 const ErrorPage = lazy(() => import('./pages/error'));
 
 const page = (elem) => <Suspense fallback={<LoadingPage />}>{elem}</Suspense>;
@@ -36,6 +37,10 @@ export const browserRouter = createBrowserRouter([
             {
                 path: '/membership',
                 element: page(<MembershipPage />)
+            },
+            {
+                path: '/history',
+                element: page(<HistoryPage />)
             },
             {
                 path: '/about',

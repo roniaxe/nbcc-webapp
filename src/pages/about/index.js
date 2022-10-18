@@ -62,7 +62,7 @@ export default function AboutPage() {
                     }}
                 >
                     <Tab label="General" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
+                    <Tab label="History" {...a11yProps(1)} />
                     <Tab label="Item Three" {...a11yProps(2)} />
                     <Tab label="Item Four" {...a11yProps(3)} />
                     <Tab label="Item Five" {...a11yProps(4)} />
@@ -84,7 +84,7 @@ export default function AboutPage() {
                     </Container>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    Item Two
+                    History
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
                     Item Three
