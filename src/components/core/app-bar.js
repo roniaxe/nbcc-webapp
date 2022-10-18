@@ -22,7 +22,7 @@ import { Brightness4, Brightness7 } from '@mui/icons-material';
 import Logo from '../../assets/NBCC_logo.jpg';
 import { actions as generalActions } from '../../redux/general/slice';
 
-const pages = ['Home', 'Galleries', 'Tournaments', 'Membership', 'About'];
+const pages = ['Home', 'Galleries', 'Tournaments', 'History', 'Membership', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function AppBar({ sx }) {

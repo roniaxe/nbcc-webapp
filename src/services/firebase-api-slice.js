@@ -18,11 +18,15 @@ export const firebaseApiSlice = createApi({
         }),
         getMembershipData: build.query({
             query: () => 'membership.json'
+        }),
+        getHistoryData: build.query({
+            query: () => 'history.json'
         })
     })
 });
 
 export const {
     useGetAboutDataQuery,
-    useGetMembershipDataQuery
+    useGetMembershipDataQuery,
+    useGetHistoryDataQuery
 } = firebaseApiSlice;
