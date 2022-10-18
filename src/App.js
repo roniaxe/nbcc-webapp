@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import { HelmetProvider } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
@@ -8,13 +8,15 @@ import { browserRouter } from './page-router';
 function App() {
 
     const appThemeMode = useSelector((state) => state.general.mode);
-    const theme = createTheme(
+    let theme = createTheme(
         {
             palette: {
                 mode: appThemeMode
             }
         }
     );
+
+    theme = responsiveFontSizes(theme);
 
     return (
         <ThemeProvider theme={theme}>

@@ -75,8 +75,7 @@ function AppBar({ sx }) {
                             sx={{
                                 maxWidth: 80,
                                 mr: 10,
-                                display: { xs: 'none', md: 'flex' },
-                                boxShadow: '3px 3px 9px cyan'
+                                display: { xs: 'none', md: 'flex' }
                             }}
                             onClick={() => setSelectedIndex(0)}
                         >
@@ -138,9 +137,13 @@ function AppBar({ sx }) {
                                 '& .Mui-selected': {
                                     textDecoration: 'underline',
                                     textUnderlineOffset: '5px',
-                                    borderRadius: '10px',
-                                    '&:hover': { color: 'white' }
-                                }
+                                    borderRadius: '10px'
+                                },
+                                '& .Mui-selected:hover': {
+                                    color: 'white',
+                                    textDecoration: 'underline',
+                                    textUnderlineOffset: '5px'
+                                },
                             },
                             justifyContent: 'space-evenly'
                         }}
